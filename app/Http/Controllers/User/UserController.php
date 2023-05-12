@@ -93,8 +93,6 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user): JsonResponse
     {
-        $this->allowAdminAction();
-
         $rules = [
             'email' => 'email|unique:users,email,' . $user->id,
             'password' => 'min:6|confirmed',
@@ -118,6 +116,7 @@ class UserController extends ApiController
         }
 
         if ($request->has('admin')) {
+            $this->allowAdminAction();
             if (!$user->isVerified()) {
                 return $this->errorResponse('Only verified users can change their own admin value', Response::HTTP_CONFLICT);
             }
