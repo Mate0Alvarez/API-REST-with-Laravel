@@ -82,7 +82,7 @@ class User extends Authenticatable
         return $this->verified == self::VERIFIED_USER;
     }
 
-    public function isAmind():bool
+    public function isAdmin():bool
     {
         return $this->admin == self::ADMIN_USER;
     }
