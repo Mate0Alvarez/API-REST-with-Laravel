@@ -66,6 +66,7 @@ Route::resource('categories.sellers', CategorySellerController::class, ['only' =
 Route::resource('categories.transactions', CategoryTransactionController::class, ['only' => ['index']]);
 Route::resource('categories.buyers', CategoryBuyerController::class, ['only' => ['index']]);
 
+Route::name('me')->get('users/me', [UserController::class, 'me']);
 Route::resource('users', UserController::class, ['except' => ['create', 'edit']]);
 Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
 Route::name('resend')->get('users/{user}/resend', [UserController::class, 'resend']);

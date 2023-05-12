@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponse;
+use Fruitcake\Cors\CorsService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -86,6 +87,15 @@ class Handler extends ExceptionHandler
     }
 
     public function render($request, Throwable $exception)
+    {
+        $response = $this->handleException($request, $exception);
+
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
+
+        return $response;
+    }
+
+    public function handleException($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException) {
             $model = Str::lower(class_basename($exception->getModel()));

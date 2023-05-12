@@ -164,4 +164,10 @@ class UserController extends ApiController
 
         return $this->showMessage('The verification email has been resend');
     }
+
+    public function me(Request $request)
+    {
+        $user = $request->user();
+        return $this->showOne($user);
+    }
 }
