@@ -20,6 +20,8 @@ class TransactionController extends ApiController
      */
     public function index(): JsonResponse
     {
+        $this->allowAdminAction();
+
         return $this->showAll(Transaction::all());
     }
 

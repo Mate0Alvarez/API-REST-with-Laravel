@@ -17,6 +17,8 @@ class BuyerSellerController extends ApiController
      */
     public function index(Buyer $buyer): JsonResponse
     {
+        $this->allowAdminAction();
+        
         $seller = $buyer
                         ->transactions()
                         ->with('product.seller')

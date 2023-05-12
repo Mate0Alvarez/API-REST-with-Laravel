@@ -29,6 +29,8 @@ class UserController extends ApiController
      */
     public function index(): JsonResponse
     {
+        $this->allowAdminAction();
+
         return $this->showAll(User::all());
     }
 
@@ -91,6 +93,8 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user): JsonResponse
     {
+        $this->allowAdminAction();
+
         $rules = [
             'email' => 'email|unique:users,email,' . $user->id,
             'password' => 'min:6|confirmed',

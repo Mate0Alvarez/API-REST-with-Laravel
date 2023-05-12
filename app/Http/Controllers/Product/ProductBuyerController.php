@@ -18,6 +18,8 @@ class ProductBuyerController extends ApiController
      */
     public function index(Product $product): JsonResponse
     {
+        $this->allowAdminAction();
+
         return $this->showAll(
             $product
                 ->transactions()

@@ -19,6 +19,8 @@ class SellerController extends ApiController
      */
     public function index(): JsonResponse
     {
+        $this->allowAdminAction();
+        
         return $this->showAll(Seller::all());
     }
 

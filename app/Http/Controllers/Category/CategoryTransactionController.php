@@ -17,6 +17,8 @@ class CategoryTransactionController extends ApiController
      */
     public function index(Category $category): JsonResponse
     {
+        $this->allowAdminAction();
+
         return $this->showAll(
             $category
                 ->products()
